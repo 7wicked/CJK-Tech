@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lead gen agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="sidebar">
+      <div class="brand">
+        <strong>Lead gen agent</strong>
+        <span>Outreach console</span>
+      </div>
+      <nav class="nav" id="nav">
+        <a href="#/dashboard" data-view="dashboard"><span class="dot"></span>Dashboard</a>
+        <a href="#/leads" data-view="leads"><span class="dot"></span>Leads</a>
+        <a href="#/campaigns" data-view="campaigns"><span class="dot"></span>Campaigns</a>
+        <a href="#/channels" data-view="channels"><span class="dot"></span>Channels</a>
+      </nav>
+      <div class="sidebar-foot">
+        <div id="modeBadge"><span class="mode-pill">Checking</span></div>
+        <div id="modeNote">Connecting to the server</div>
+      </div>
+    </header>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">Dashboard</h1>
+          <div class="sub" id="pageSub">What your outreach has done so far</div>
+        </div>
+        <div class="spacer"></div>
+        <div id="pageActions"></div>
+      </header>
+
+      <!-- Dashboard -->
+      <section class="view" id="view-dashboard">
+        <div class="pipeline">
+          <h2>Pipeline</h2>
+          <div class="pipeline-bar" id="pipelineBar"></div>
+          <div class="pipeline-key" id="pipelineKey"></div>
+        </div>
+
+        <div class="grid cols-4" style="margin-bottom:16px" id="statCards"></div>
+
+        <div class="grid cols-2">
+          <div class="card pad-0">
+            <div class="card-head"><h2>Channel performance</h2></div>
+            <div id="channelStats"></div>
+          </div>
+          <div class="card pad-0">
+            <div class="card-head"><h2>Recent messages</h2></div>
+            <div id="recentMessages"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leads -->
+      <section class="view" id="view-leads" hidden>
+        <div class="toolbar">
+          <input class="search" id="leadSearch" type="search" placeholder="Search name, email or company" />
+          <select id="leadStatusFilter">
+            <option value="">All statuses</option>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="replied">Replied</option>
+            <option value="qualified">Qualified</option>
+            <option value="won">Won</option>
+            <option value="lost">Lost</option>
+            <option value="unsubscribed">Unsubscribed</option>
+          </select>
+          <select id="leadSourceFilter">
+            <option value="">All sources</option>
+            <option value="manual">Manual</option>
+            <option value="csv">CSV</option>
+            <option value="n8n">n8n</option>
+            <option value="webform">Web form</option>
+          </select>
+          <div class="spacer"></div>
+          <span class="sub" id="leadCount"></span>
+        </div>
+        <div class="card pad-0">
+          <table>
+            <thead>
+              <tr><th>Lead</th><th>Company</th><th>Status</th><th>Source</th><th>Tags</th><th>Added</th></tr>
+            </thead>
+            <tbody id="leadRows"></tbody>
+          </table>
+          <div id="leadEmpty"></div>
+        </div>
+      </section>
+
+      <!-- Campaigns -->
+      <section class="view" id="view-campaigns" hidden>
+        <div class="card pad-0">
+          <table>
+            <thead>
+              <tr><th>Campaign</th><th>Channel</th><th>Status</th><th>Enrolled</th><th>Sent</th><th>Replied</th><th>Failed</th><th></th></tr>
+            </thead>
+            <tbody id="campaignRows"></tbody>
+          </table>
+          <div id="campaignEmpty"></div>
+        </div>
+      </section>
+
+      <!-- Channels -->
+      <section class="view" id="view-channels" hidden>
+        <div class="card" style="margin-bottom:16px">
+          <h2 style="margin-bottom:10px">n8n connection</h2>
+          <div id="n8nStatus"></div>
+        </div>
+        <div class="grid cols-3" id="channelCards"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Lead detail drawer -->
+  <div class="scrim" id="leadDrawer" hidden>
+    <div class="drawer" role="dialog" aria-label="Lead detail">
+      <div class="panel-head">
+        <h2 id="leadDrawerTitle">Lead</h2>
+        <div class="spacer"></div>
+        <button class="ghost" data-close-drawer>Close</button>
+      </div>
+      <div class="panel-body" id="leadDrawerBody"></div>
+    </div>
+  </div>
+
+  <!-- Generic modal -->
+  <div class="scrim center" id="modal" hidden>
+    <div class="modal" role="dialog" aria-label="Dialog">
+      <div class="panel-head">
+        <h2 id="modalTitle">Dialog</h2>
+        <div class="spacer"></div>
+        <button class="ghost" data-close-modal>Close</button>
+      </div>
+      <div class="panel-body" id="modalBody"></div>
+      <div class="panel-foot" id="modalFoot"></div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
